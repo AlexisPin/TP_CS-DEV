@@ -6,4 +6,3 @@ if year % 4 == 0 and strYear[2] != 0 and strYear[3] != 0 or year % 400 == 0:
 else:
     print("L'année {} n'est pas une année bissextile!" .format(year))
 
-dffbbffbbbffb
