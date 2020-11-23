@@ -107,7 +107,7 @@ def syracuse(N) :
         return S 
 
 def suiteEntier(N):
-    for i in range(30) :
+    for i in range(15) :
         N = syracuse(N)  
         print(N)    
 
@@ -115,8 +115,11 @@ def tempsDeVol(N) :
     i = 0
     while N != 1 :
         syracuse(N)
-        i+=1 
-    print('Le temps de vol est de',i)
+        i += 1 
+    return i
 
 suiteEntier(N)
-tempsDeVol(N)
+
+# def altitudeMaximal(N) :
+#     M = 0 
+#     for i in range(tempsDeVol(N)) :
