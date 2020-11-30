@@ -42,6 +42,25 @@ while continuer_partie:
         else:
             letters.append(letter)  # liste qui nous permet de stocker les lettres utilisé
         return alreadyUse,letter,letters
+
+
+    def wordToFind(letters):
+        for (index, i) in enumerate(word):
+            if i in letters:
+                myWordList[index] = i  # on complète au fur et à mesure la liste du joueur
+                print(i, end=" ")
+            else:
+                print("_", end=" ")
+
+
+    def inscreaseError(error):
+        if letter not in word and alreadyUse == False:
+            error += 1
+            myBody[error - 1] = bodyItems[error - 1]
+            print('Il vous reste {} tentative(s)'.format(8 - error))
+            if error == 8:
+                print('Perdu ! Le mot qui fallait trouvé était {}'.format(word))
+        return error
     while error < 8 :
 
         print(' \n -----')
@@ -52,38 +71,17 @@ while continuer_partie:
         print('_|_')
 
         # on place ici la première lettre
-        for (index, i) in enumerate(word):
-            if i in letters:
-                myWordList[index] = i  # on complète au fur et à mesure la liste du joueur
-                print(i, end=" ")
-            else:
-                print("_", end=" ")
+        wordToFind(letters)
 
         alreadyUse,letter,letters = checkAlreadyUse(letters)
         # on parcours la liste contenant les lettre du mot et on verifie si elles sont dans les lettres utilisé
-        for (index, i) in enumerate(word):
-            if i in letters:
-                myWordList[index] = i  # on complète au fur et à mesure la liste du joueur
-                print(i, end=" ")
-            else:
-                print("_", end=" ")
-        # si on écrit le mot directement on gagne
-        if len(letter) > 1 and letter == word:
+        wordToFind(letters)
+        # si on écrit le mot directement on gagne ou on compare les deux listes celle du joueur et celle du mot défini au début
+        if len(letter) > 1 and letter == word or myWordList == wordList:
             print('Vous avez gagné !')
             break
 
-    #on compare les deux listes celle du joueur et celle du mot défini au début
-        if myWordList == wordList:
-            print('Vous avez gagné !')
-            break
-
-
-        if letter not in word and alreadyUse == False:
-            error += 1
-            myBody[error-1] = bodyItems[error-1]
-            print('Il vous reste {} tentative(s)' .format(8 - error))
-            if error ==8:
-                print('Perdu ! Le mot qui fallait trouvé était {}' .format(word))
+        error = inscreaseError(error)
 
     quitter = input("Souhaitez-vous quitter le jeu (o/n) ? ")
     if quitter == "o" or quitter == "O":
