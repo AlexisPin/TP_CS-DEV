@@ -16,7 +16,7 @@ while continuer_partie:
     error = 0
     wordList = []
     myWordList = []
-    bodyItems = ['O', '/', '|', '\\', '/', '\\', '', '']
+    bodyItems = [' \n -----','|','O', '/', '|', '\\', '/', '\\']
     myBody = ['', '', '', '', '', '', '', '']
     #on créer un liste de tout les mots contenu dans le fichiers
     for oneWord in allWordsSort:
@@ -24,23 +24,23 @@ while continuer_partie:
     #on choisi un mot aléatoirement
     word = random.choice(words)
 
-    #on créer une liste avec les lettres du mot choisi aléatoirement
+    #on créer une liste avec les letters du mot choisi aléatoirement
     for x in word:
         wordList.append(x)
-    #on donne déjà la première lettre
+    #on donne déjà la première letter
     letters = [wordList[0]]
-    #on créer une liste vide de la longueur de word qui sert à afficher le mot au fur et à mesure qu'on trouve les lettres
+    #on créer une liste vide de la longueur de word qui sert à afficher le mot au fur et à mesure qu'on trouve les letters
     for x in word:
         myWordList.append("")
 
-    def checkAlreadyUse(letters): #vérifie si la lettre est déjà utilisé
-        letter = input('Choisissez une lettre : ')
+    def checkAlreadyUse(letters): #vérifie si la letter est déjà utilisé
+
         alreadyUse = False
         if letter in letters:
             alreadyUse = True
-            print('Lettre déjà proposé')
+            print('letter déjà proposé')
         else:
-            letters.append(letter)  # liste qui nous permet de stocker les lettres utilisé
+            letters.append(letter)  # liste qui nous permet de stocker les letters utilisé
         return alreadyUse,letter,letters
 
 
@@ -55,26 +55,41 @@ while continuer_partie:
 
     def inscreaseError(error):
         if letter not in word and alreadyUse == False:
+            myBody[error] = bodyItems[error]
             error += 1
-            myBody[error - 1] = bodyItems[error - 1]
             print('Il vous reste {} tentative(s)'.format(8 - error))
             if error == 8:
+                print(' \n -----')
+                print(' |   |')
+                print(' |   O')
+                print(' |  /|\\')
+                print(' |  / \\')
+                print('_|_')
                 print('Perdu ! Le mot qui fallait trouvé était {}'.format(word))
         return error
+
+
+    def checkLetter():
+        letter = input('Choisissez une lettre : ')
+        letter = letter.lower()
+        if not letter.isalpha(): #vérifie sur letter est un lettre de a-z
+            print("Letter non valide.")
+            return checkLetter()
+        else:
+            return letter
     while error < 8 :
 
-        print(' \n -----')
-        print(' |   |')
-        print(' |   {}' .format(myBody[0]))
-        print(' |  {}{}{}'.format(myBody[1],myBody[2],myBody[3]))
-        print(' |  {} {}'.format(myBody[4], myBody[5]))
+        print('{}'.format(myBody[0]))
+        print(' |   {}'.format(myBody[1]))
+        print(' |   {}'.format(myBody[2]))
+        print(' |  {}{}{}'.format(myBody[3], myBody[4], myBody[5]))
+        print(' |  {} {}'.format(myBody[6], myBody[7]))
         print('_|_')
-
-        # on place ici la première lettre
+        # on place ici la première letter
         wordToFind(letters)
-
+        letter = checkLetter()
         alreadyUse,letter,letters = checkAlreadyUse(letters)
-        # on parcours la liste contenant les lettre du mot et on verifie si elles sont dans les lettres utilisé
+        # on parcours la liste contenant les letter du mot et on verifie si elles sont dans les letters utilisé
         wordToFind(letters)
         # si on écrit le mot directement on gagne ou on compare les deux listes celle du joueur et celle du mot défini au début
         if len(letter) > 1 and letter == word or myWordList == wordList:
@@ -82,6 +97,8 @@ while continuer_partie:
             break
 
         error = inscreaseError(error)
+
+
 
     quitter = input("Souhaitez-vous quitter le jeu (o/n) ? ")
     if quitter == "o" or quitter == "O":
