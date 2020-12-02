@@ -5,11 +5,7 @@
 
 import random
 #on ouvre le fichier contenant la liste de tout les mots / le fichier est dans le même répertoire que le code
-allWords = open("words.txt" , "r" )
 
-allWordsSort = sorted(allWords)
-
-allWords.close()
 continuer_partie = True
 while continuer_partie:
     # varibales utiles
@@ -19,12 +15,14 @@ while continuer_partie:
     myWordList = []
     bodyItems = [' \n -----','|','O', ' /', '|', '\\', '/', '\\']
     myBody = ['', '', '', '', '', '', '', '']
-    # on créer un liste de tout les mots contenu dans le fichiers
-    for oneWord in allWordsSort:
-        words.append(oneWord.rstrip('\n'))
 
     #on choisi un mot
-    def wordChoice(words) :
+    def wordChoice() :
+        allWords = open("words.txt", "r")
+        allWordsSort = sorted(allWords)
+        allWords.close()
+        for oneWord in allWordsSort:
+            words.append(oneWord.rstrip('\n'))
         word = random.choice(words)
         # on créer une liste avec les letters du mot choisi aléatoirement
         for x in word:
@@ -36,7 +34,7 @@ while continuer_partie:
             myWordList.append("")
         return word,wordList,myWordList,letters
 
-    word,wordList,myWordList,letters = wordChoice(words)
+    word,wordList,myWordList,letters = wordChoice()
 
     def checkAlreadyUse(letters): #vérifie si la letter est déjà utilisé
 
@@ -88,7 +86,7 @@ while continuer_partie:
         print('{}'.format(myBody[0]))
         print(' |   {}'.format(myBody[1]))
         print(' |   {}'.format(myBody[2]))
-        print(' |  {}{}{}'.format(myBody[3], myBody[4], myBody[5]))
+        print(' | {}{}{}'.format(myBody[3], myBody[4], myBody[5]))
         print(' |  {} {}'.format(myBody[6], myBody[7]))
         print('_|_')
         # on place ici la première letter
