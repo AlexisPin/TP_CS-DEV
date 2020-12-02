@@ -9,6 +9,7 @@ allWords = open("words.txt" , "r" )
 
 allWordsSort = sorted(allWords)
 
+allWords.close()
 continuer_partie = True
 while continuer_partie:
     # varibales utiles
@@ -16,29 +17,33 @@ while continuer_partie:
     error = 0
     wordList = []
     myWordList = []
-    bodyItems = [' \n -----','|','O', '/', '|', '\\', '/', '\\']
+    bodyItems = [' \n -----','|','O', ' /', '|', '\\', '/', '\\']
     myBody = ['', '', '', '', '', '', '', '']
-    #on créer un liste de tout les mots contenu dans le fichiers
+    # on créer un liste de tout les mots contenu dans le fichiers
     for oneWord in allWordsSort:
         words.append(oneWord.rstrip('\n'))
-    #on choisi un mot aléatoirement
-    word = random.choice(words)
 
-    #on créer une liste avec les letters du mot choisi aléatoirement
-    for x in word:
-        wordList.append(x)
-    #on donne déjà la première letter
-    letters = [wordList[0]]
-    #on créer une liste vide de la longueur de word qui sert à afficher le mot au fur et à mesure qu'on trouve les letters
-    for x in word:
-        myWordList.append("")
+    #on choisi un mot
+    def wordChoice(words) :
+        word = random.choice(words)
+        # on créer une liste avec les letters du mot choisi aléatoirement
+        for x in word:
+            wordList.append(x)
+        # on donne déjà la première letter
+        letters = [wordList[0]]
+        # on créer une liste vide de la longueur de word qui sert à afficher le mot au fur et à mesure qu'on trouve les letters
+        for _ in word:
+            myWordList.append("")
+        return word,wordList,myWordList,letters
+
+    word,wordList,myWordList,letters = wordChoice(words)
 
     def checkAlreadyUse(letters): #vérifie si la letter est déjà utilisé
 
         alreadyUse = False
         if letter in letters:
             alreadyUse = True
-            print('letter déjà proposé')
+            print('lettre déjà proposé')
         else:
             letters.append(letter)  # liste qui nous permet de stocker les letters utilisé
         return alreadyUse,letter,letters
@@ -72,11 +77,12 @@ while continuer_partie:
     def checkLetter():
         letter = input('Choisissez une lettre : ')
         letter = letter.lower()
-        if not letter.isalpha(): #vérifie sur letter est un lettre de a-z
+        if not letter.isalpha(): #vérifie sur letter est une lettre de a-z
             print("Letter non valide.")
             return checkLetter()
         else:
             return letter
+
     while error < 8 :
 
         print('{}'.format(myBody[0]))
@@ -91,14 +97,12 @@ while continuer_partie:
         alreadyUse,letter,letters = checkAlreadyUse(letters)
         # on parcours la liste contenant les letter du mot et on verifie si elles sont dans les letters utilisé
         wordToFind(letters)
+
         # si on écrit le mot directement on gagne ou on compare les deux listes celle du joueur et celle du mot défini au début
         if len(letter) > 1 and letter == word or myWordList == wordList:
             print('Vous avez gagné !')
             break
-
         error = inscreaseError(error)
-
-
 
     quitter = input("Souhaitez-vous quitter le jeu (o/n) ? ")
     if quitter == "o" or quitter == "O":
@@ -106,6 +110,6 @@ while continuer_partie:
         continuer_partie = False
     else :
         continuer_partie = True
-allWords.close()
+
 
 
