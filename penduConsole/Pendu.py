@@ -16,7 +16,11 @@ while continuer_partie:
     bodyItems = [' \n -----','|','O', ' /', '|', '\\', '/', '\\']
     myBody = ['', '', '', '', '', '', '', '']
 
-    #on choisi un mot
+
+    # but : on choisi un mot aleatoire et on crée les variables nécessaires
+    # sorties : word : mot choisi aléatoirement, wordList : liste des lettres de word ,
+    # myWordList : liste qui contient les lettres trouvés par le joueur utile pour détecter si le joueur à gagné
+    # letters : lettres déjà utilisé ici première lettre du mot
     def wordChoice() :
         allWords = open("words.txt", "r")
         allWordsSort = sorted(allWords)
@@ -36,6 +40,10 @@ while continuer_partie:
 
     word,wordList,myWordList,letters = wordChoice()
 
+
+    # but : vérifie si la letter est déjà utilisé,
+    # entrée : letters : liste des lettres utilisés,
+    # sorties : alreadyUse : varibales booléenne, letter : lettre choisie , letters : liste des lettres utilisés
     def checkAlreadyUse(letters): #vérifie si la letter est déjà utilisé
 
         alreadyUse = False
@@ -46,7 +54,8 @@ while continuer_partie:
             letters.append(letter)  # liste qui nous permet de stocker les letters utilisé
         return alreadyUse,letter,letters
 
-
+    # but : afficher le mot en cours de recherche,
+    # entrée : letters : liste des lettres utilisés,
     def wordToFind(letters):
         for (index, i) in enumerate(word):
             if i in letters:
@@ -56,6 +65,9 @@ while continuer_partie:
                 print("_", end=" ")
 
 
+    # but : gérer le nombre d'erreur du joueur,
+    # entrée : error : nombre d'erreur type : entier,
+    # sorties : error : nombre d'erreur type : entier,
     def inscreaseError(error):
         if letter not in word and alreadyUse == False:
             myBody[error] = bodyItems[error]
@@ -72,6 +84,8 @@ while continuer_partie:
         return error
 
 
+    # but : vérifier la validité de la lettre
+    # sortie : letter : lettre choisie par le joueur type str
     def checkLetter():
         letter = input('Choisissez une lettre : ')
         letter = letter.lower()
@@ -81,8 +95,8 @@ while continuer_partie:
         else:
             return letter
 
-    while error < 8 :
 
+    while error < 8:
         print('{}'.format(myBody[0]))
         print(' |   {}'.format(myBody[1]))
         print(' |   {}'.format(myBody[2]))
