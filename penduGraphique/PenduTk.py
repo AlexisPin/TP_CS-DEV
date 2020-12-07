@@ -2,7 +2,7 @@
 #Alexis PINCEMIN
 #7/12/2020
 #Jeu du Pendu version tkinter
-
+#Lien gitbub https://github.com/AlexisPin/TP_CS-DEV
 from tkinter import Frame , Label , Canvas , Button , Entry , Tk , PhotoImage , StringVar , Menu
 import random
 #but : on choisi un mot aleatoir et on crée les variables nécessaires
