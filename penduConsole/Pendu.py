@@ -2,6 +2,7 @@
 #Alexis PINCEMIN
 #30/11/2020
 #Jeu du Pendu version console
+#Lien gitbub https://github.com/AlexisPin/TP_CS-DEV
 
 import random
 #on ouvre le fichier contenant la liste de tout les mots / le fichier est dans le même répertoire que le code
