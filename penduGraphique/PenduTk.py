@@ -133,7 +133,7 @@ def playAgain():
     mainFunction()
     return word, wordList, myWordList, letters, error
 
-
+#but afficher le score en fin de partie
 def votreScore(error):
     if error > 0:
         valueScore.set('Votre score est de {}' .format(7-error))
