@@ -10,8 +10,16 @@ error = 0
 wordList = []
 myWordList = []
 
-#on choisi un mot
-def wordChoice() :
+#but : on choisi un mot aleatoir et on crée les variables nécessaires
+#sorties : word : mot choisi aléatoirement, wordList : liste des lettres de word ,
+#myWordList : liste qui contient les lettres trouvés par le joueur utile pour détecter si le joueur à gagné
+# letters : lettres déjà utilisé ici première lettre du mot, error : nombre d'erreur ici 0
+def wordChoice():
+    # varibales utiles
+    words = []
+    wordList = []
+    myWordList = []
+    error = 0
     # on ouvre le fichier contenant la liste de tout les mots / le fichier est dans le même répertoire que le code
     allWords = open("words.txt", "r")
     allWordsSort = sorted(allWords)
@@ -28,7 +36,7 @@ def wordChoice() :
     # on créer une liste vide de la longueur de word qui sert à afficher le mot au fur et à mesure qu'on trouve les letters
     for _ in word:
         myWordList.append("")
-    return word,wordList,myWordList,letters
+    return word, wordList, myWordList, letters,error
 
 word,wordList,myWordList,letters = wordChoice()
 
